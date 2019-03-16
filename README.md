@@ -20,7 +20,7 @@ THE VARIABLE c AND THE VARIABLE a
         }
     }
 =============================================================================
-    http://localhost/?c=User&a=search
+     http://localhost/?c=User&a=search
 
     class UserController{
         public function search(){
@@ -28,7 +28,7 @@ THE VARIABLE c AND THE VARIABLE a
         }
     }
 =============================================================================
-    http://localhost/?c=user&a=search&id=1902
+     http://localhost/?c=user&a=search&id=1902
 
     class UserController{
         public function search(Request $request){
@@ -37,7 +37,7 @@ THE VARIABLE c AND THE VARIABLE a
         }
     }
 =============================================================================
-    http://localhost/?c=user&a=getUser&id=1902
+     http://localhost/?c=user&a=getUser&id=1902
 
     class UserController{
         public function getUser(Request $request){
