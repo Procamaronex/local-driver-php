@@ -42,7 +42,7 @@ THE VARIABLE c AND THE VARIABLE a
     class UserController{
         public function getUser(Request $request){
             $id = $request->input('id');
-            $data =  DB("SELECT * FROM User u WHERE u.id=?",[$id])
+            $data =  DB("SELECT * FROM User u WHERE u.id=?",[$id]);
             return response()->json($data);
         }
     }
