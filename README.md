@@ -20,6 +20,7 @@ THE VARIABLE c AND THE VARIABLE a
         }
     }
 #search
+
      http://localhost/?c=User&a=search
 
     class UserController{
@@ -28,6 +29,7 @@ THE VARIABLE c AND THE VARIABLE a
         }
     }
 #search for id
+
      http://localhost/?c=user&a=search&id=1902
 
     class UserController{
@@ -37,6 +39,7 @@ THE VARIABLE c AND THE VARIABLE a
         }
     }
 #getUser
+
      http://localhost/?c=user&a=getUser&id=1902
 
     class UserController{
