@@ -19,7 +19,7 @@ THE VARIABLE c AND THE VARIABLE a
             return "Hello this Method is by Default";
         }
     }
-#=============================================================================
+#search
      http://localhost/?c=User&a=search
 
     class UserController{
@@ -27,7 +27,7 @@ THE VARIABLE c AND THE VARIABLE a
             return "Hello World";
         }
     }
-#=============================================================================
+#search for id
      http://localhost/?c=user&a=search&id=1902
 
     class UserController{
@@ -36,7 +36,7 @@ THE VARIABLE c AND THE VARIABLE a
             return "Your id is ".$id ;
         }
     }
-#=============================================================================
+#getUser
      http://localhost/?c=user&a=getUser&id=1902
 
     class UserController{
