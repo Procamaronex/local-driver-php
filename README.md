@@ -19,6 +19,15 @@ THE VARIABLE c AND THE VARIABLE a
             return "Hello this Method is by Default";
         }
     }
+# view
+
+    http://localhost/?c=user
+
+    class UserController{
+        public function index(){
+            return view("name_your_view.php");
+        }
+    }
 # search
 
      http://localhost/?c=User&a=search
@@ -49,3 +58,4 @@ THE VARIABLE c AND THE VARIABLE a
             return response()->json($data);
         }
     }
+
