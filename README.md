@@ -10,7 +10,7 @@ THE VARIABLE c AND THE VARIABLE a
     c = controller
     a = action
 
-#Example UserController.php
+# Example UserController.php
 
     http://localhost/?c=user
 
@@ -19,7 +19,7 @@ THE VARIABLE c AND THE VARIABLE a
             return "Hello this Method is by Default";
         }
     }
-#search
+# search
 
      http://localhost/?c=User&a=search
 
@@ -28,7 +28,7 @@ THE VARIABLE c AND THE VARIABLE a
             return "Hello World";
         }
     }
-#search for id
+# search for id
 
      http://localhost/?c=user&a=search&id=1902
 
@@ -38,7 +38,7 @@ THE VARIABLE c AND THE VARIABLE a
             return "Your id is ".$id ;
         }
     }
-#getUser
+# getUser
 
      http://localhost/?c=user&a=getUser&id=1902
 
