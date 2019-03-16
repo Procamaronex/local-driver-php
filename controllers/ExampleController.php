@@ -5,7 +5,7 @@
 	class ExampleController{
 
 		public function index(){
-			$name = "Ronny Matute";
+			$name = "Ronny Matute Granizo";
 			$date = date("d-m-Y");
 			return view("example.php",compact('name','date'));
 		}
