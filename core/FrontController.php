@@ -25,18 +25,18 @@
                 endif;
             } else {
                 $controller = $_REQUEST['c'];
-                $accion     = isset($_REQUEST['a']) ? $_REQUEST['a'] : 'index';
+                $action     = isset($_REQUEST['a']) ? $_REQUEST['a'] : 'index';
                 if(file_exists('controllers/' . ucwords($controller) . 'Controller.php')):
                     require_once 'controllers/' . ucwords($controller) . 'Controller.php';
                     $controller = ucwords($controller) . 'Controller';
                     $controller = new $controller;
-                    if(method_exists($controller, $accion)):
-                        $r = call_user_func(array($controller, $accion),request());
+                    if(method_exists($controller, $action)):
+                        $r = call_user_func(array($controller, $action),request());
                         if(!is_object($r)):
                             echo $r;
                         endif;
                     else:
-                        error(['M',$accion,$_REQUEST['c']]);
+                        error(['M',$action,$_REQUEST['c']]);
                     endif;
                 else:
                     error(['C',$controller]);
