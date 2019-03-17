@@ -37,7 +37,7 @@ THE VARIABLE c AND THE VARIABLE a
             return "Hello World";
         }
     }
-# search for id
+# search by id
 
      http://localhost/?c=user&a=search&id=1902
 
