@@ -58,4 +58,15 @@ THE VARIABLE c AND THE VARIABLE a
             return response()->json($data);
         }
     }
+# getUser with storeProcedure
+
+     http://localhost/?c=user&a=getUser&id=1902
+
+    class UserController{
+        public function getUser(Request $request){
+            $id = $request->input('id');
+            $data =  DB("CALL yourStoreProcedure(?)",[$id]);
+            return response()->json($data);
+        }
+    }
 
