@@ -59,7 +59,11 @@
 	            try {
 		            $sentencia = $db->prepare($sql);
 		            $sentencia->execute($parametros);
-		            $resultset = $sentencia->fetchAll(PDO::FETCH_CLASS, 'EntidadBase');
+		            if (preg_match('/\bUPDATE\b/', $sql) || preg_match('/\bINSERT\b/', $sql) || preg_match('/\bupdate\b/', $sql) || preg_match('/\binsert\b/', $sql) || preg_match('/\bDELETE\b/', $sql) || preg_match('/\bdelete\b/', $sql)) {
+					    $resultset = $sentencia->rowcount().' row affected';
+					}else{
+						$resultset = $sentencia->fetchAll(PDO::FETCH_CLASS, 'EntidadBase');
+					}
 		            return $resultset;
 		        } catch (Exception $ex) {
 		        	die($ex->getMessage());

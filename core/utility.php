@@ -31,6 +31,12 @@
 		}
 	}
 
+	if(!function_exists('json')){
+		function json($val){
+			return json_encode($val);
+		}
+	}
+
 	if(!function_exists('flushSession')){
 		function flushSession($key){
 			(isset($_SESSION[$key]) && !empty($_SESSION[$key]))?$_SESSION[$key] = NULL:NULL;
