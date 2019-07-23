@@ -58,7 +58,7 @@
 	}
 
 	if(!function_exists('jsonSave')){
-		public function jsonSave($path,$data){
+		function jsonSave($path,$data){
 			if(is_array($data)){
 				if(file_exists($path)){
 					$temp = $this->jsonList($path);
@@ -80,7 +80,7 @@
 	}
 	
 	if(!function_exists('jsonList')){
-		public function jsonList($path){
+		function jsonList($path){
 			if(file_exists($path)){
 				return $jsonString = file_get_contents($path);
 			}
