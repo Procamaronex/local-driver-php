@@ -18,7 +18,7 @@
 
 		public function input($param = []){
 			$params = [];
-			foreach ($_REQUEST as $key => $value){if($key !== 'module' && $key !== 'action'){ $this->results[$key] = $value;}}
+			foreach ($_REQUEST as $key => $value){if($key !== 'c' && $key !== 'a'){ $this->results[$key] = $value;}}
 			return (!empty($param))? $this->results[$param] ?? 'name=\''.$param.'\' Not exits' : $this->results ?? [];
 		}
 

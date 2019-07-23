@@ -57,6 +57,37 @@
 		}
 	}
 
+	if(!function_exists('jsonSave')){
+		public function jsonSave($path,$data){
+			if(is_array($data)){
+				if(file_exists($path)){
+					$temp = $this->jsonList($path);
+					$add = [];
+					if(is_null(json_decode($temp))){
+						$add = array_merge([$data]);
+					}else{
+						$add = array_merge([$data],json_decode($temp));
+					}
+					if(file_put_contents($path, json_encode($add))){
+						return true;
+					}
+				}else{
+					// create file if not exits
+				}
+			}
+			return false;
+		}
+	}
+	
+	if(!function_exists('jsonList')){
+		public function jsonList($path){
+			if(file_exists($path)){
+				return $jsonString = file_get_contents($path);
+			}
+			return [];
+		}
+	}
+
 	if(!function_exists('Version')){
 		function Version(){
 			echo "<span style='color:#2D8848'>============================================</span><br><span style='color:#992F1E;font-weight:bold'>&nbsp;&nbsp;MVC BASE IN PHP v. 1.0 | By. Ronny Matute Granizo</span><br><span style='color:#2D8848'>============================================</span><br>";
