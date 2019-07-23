@@ -80,9 +80,28 @@
 	}
 	
 	if(!function_exists('jsonList')){
-		function jsonList($path){
+		function jsonList($path,$items=[]){
 			if(file_exists($path)){
-				return $jsonString = file_get_contents($path);
+				if(!empty($items) & is_array($items)){
+					$d = [];
+					$jsonString = file_get_contents($path);
+					$array = array_filter(json_decode($jsonString));
+					foreach ($array as $k => $v) {
+						$v = (array)$v;
+						$respuesta = [];
+						foreach (array_keys($v) as $k1 => $v1) {
+							foreach ($items as $keyItems => $valueItems) {
+								if($valueItems == $v1){
+									$respuesta[$v1] = $v[$v1];
+								}
+							}
+						}
+						$d[] = array_merge($d,$respuesta);
+					}
+					return $d;
+				}else{
+					return $jsonString = file_get_contents($path);
+				}
 			}
 			return [];
 		}
