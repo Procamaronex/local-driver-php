@@ -61,7 +61,7 @@
 		function jsonSave($path,$data){
 			if(is_array($data)){
 				if(file_exists($path)){
-					$temp = $this->jsonList($path);
+					$temp = jsonList($path);
 					$add = [];
 					if(is_null(json_decode($temp))){
 						$add = array_merge([$data]);
