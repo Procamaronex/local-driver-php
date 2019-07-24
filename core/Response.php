@@ -60,11 +60,11 @@
 		            $sentencia = $db->prepare($sql);
 		            $sentencia->execute($parametros);
 		            if (preg_match('/\bUPDATE\b/', $sql) || preg_match('/\bINSERT\b/', $sql) || preg_match('/\bupdate\b/', $sql) || preg_match('/\binsert\b/', $sql) || preg_match('/\bDELETE\b/', $sql) || preg_match('/\bdelete\b/', $sql)) {
-					    return $resultset = $sentencia->rowcount().' row affected';
+					    $resultset = $sentencia->rowcount().' row affected';
 					}else{
 						$resultset = $sentencia->fetchAll(PDO::FETCH_CLASS, 'EntidadBase');
 					}
-		            return json_decode(json_encode($resultset),true);
+		            return $resultset;
 		        } catch (Exception $ex) {
 		        	die($ex->getMessage());
 		        }

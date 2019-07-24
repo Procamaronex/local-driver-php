@@ -64,10 +64,9 @@
 					$temp = jsonList($path);
 					$add = [];
 					if(is_null(json_decode($temp))){
-						$add[] = $data;
+						$add = array_merge([$data]);
 					}else{
-						$add = json_decode($temp);
-						$add[] = $data;
+						$add = array_merge([$data],json_decode($temp));
 					}
 					if(file_put_contents($path, json_encode($add))){
 						return true;
@@ -86,8 +85,6 @@
 				if(!empty($items) & is_array($items)){
 					$d = [];
 					$jsonString = file_get_contents($path);
-					if(empty($jsonString))
-						return $d;
 					$array = array_filter(json_decode($jsonString));
 					foreach ($array as $k => $v) {
 						$v = (array)$v;
@@ -99,7 +96,7 @@
 								}
 							}
 						}
-						$d[] = $respuesta;
+						$d[] = array_merge($d,$respuesta);
 					}
 					return $d;
 				}else{
@@ -107,31 +104,6 @@
 				}
 			}
 			return [];
-		}
-	}
-	
-	if(!function_exists('getFilter')){
-		function getFilter(array $data, array $items=[], $paramsDB=false){
-			$r = []; $d = [];
-			foreach ($data as $k => $v) {
-				foreach ($items as $key => $value) {
-					if(is_array($v)){
-						$r[$value] = $v[$value];
-					}else{
-						if($paramsDB){
-							$d[$key] = $data[$value];
-						}else{
-							$d[$value] = $data[$value];
-						}
-					}
-				}
-				if(is_array($v)){
-					$d[] = $r;
-				}else{
-					return $d;
-				}
-			}
-			return $d;
 		}
 	}
 
