@@ -70,3 +70,9 @@ THE VARIABLE c AND THE VARIABLE a
         }
     }
 
+# METHODS NEW 
+* jsonSave(filePath,dataJson);
+* jsonList(filePath,itemsFilter)
+* jsonList(filePath)
+* getFilter(dataArray,itemsFilter,paramsDB)
+* getFilter(dataArray,itemsFilter)
