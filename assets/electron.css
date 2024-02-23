@@ -1,0 +1,82 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.nucleo {
+    width: 20px;
+    height: 20px;
+    /* background-color: #ff0000; */
+    background-color: lightseagreen;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.orbita {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    /* border: 1px solid #ffffff; */
+    border-radius: 50%;
+    animation: orbit 4s linear infinite;
+}
+
+.orbita1 {
+    animation-duration: 8s;
+}
+
+.orbita2 {
+    animation-duration: 6s;
+}
+
+.orbita3 {
+    animation-duration: 5s;
+}
+
+.electron {
+    width: 8px;
+    height: 8px;
+    /* background-color: #00ff00; */
+    background-color: gray;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: electronMove 2s linear infinite;
+    opacity: 0; /* Hacemos los electrones inicialmente invisibles */
+}
+
+@keyframes orbit {
+    0% {
+        transform: rotate(0deg) translateX(100px) rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg) translateX(100px) rotate(-360deg);
+    }
+}
+
+@keyframes electronMove {
+    0%, 100% {
+        opacity: 1; /* Hacemos los electrones visibles en el inicio y el final */
+        transform: translate(-50%, -50%) scale(0.8); /* Ajustamos la escala para simular el movimiento */
+    }
+    50% {
+        opacity: 0.5; /* Reducimos la opacidad a la mitad durante la animación */
+        transform: translate(-50%, -50%) scale(1.2); /* Escala aumentada para simular movimiento */
+    }
+}

@@ -142,13 +142,13 @@
 	}
 	if(!function_exists('error')){
 		function error($a=array()){
-			echo "<br><span style='color:#2D8848'>==================================================================</span><br><span style='color:#992F1E;font-weight:bold'>";
+			echo "<body style='background: black; color: #ffffff;'><br><span style='color:#2D8848'>==================================================================</span><br><span style='color:#992F1E;font-weight:bold'>";
 			switch($a[0]):
 				case 'M':echo "Error, al parecer no existe el metodo [".$a[1]."] en el controlador [".$a[2]."Controller.php]";break;
 				case 'C':echo "Error, al parecer no existe el controlador [".$a[1]."Controller.php] en el directorio [controllers]";break;
 				case 'V':echo "Error, al parecer no existe la vista [".$a[1]."] en el directorio [views]";break;
 			endswitch;
-			echo "</span><br><span style='color:#2D8848'>==================================================================</span><br>";
+			echo "</span><br><span style='color:#2D8848'>==================================================================</span><br></body>";
 		}
 	}
 ?>

@@ -1,0 +1,36 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #121212;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.scaly-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.scale {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: rgba(0, 255, 156, 0.8);
+    border-radius: 50%;
+    pointer-events: none; /* Para que los eventos del mouse pasen a través de las escamas */
+    transition: transform 0.5s ease, background-color 0.5s ease;
+}
+
+/* Agrega una clase para cambiar el color y dar el efecto de iluminación */
+.scale.hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.8);
+}
