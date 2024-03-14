@@ -12,11 +12,48 @@
 
 		public function ficheros() {
 
-			$archivos = scandir($_ENV['REPOSITORY'] ?? 'store');
+			$repositoryPath = $_ENV['REPOSITORY'] ?? 'store';
+    		$archivos = scandir($repositoryPath);
+
 			$response =  array();
+
 			foreach ($archivos as $archivo) {
 				if($archivo != "." && $archivo != ".." && $archivo != 'index.php' && !strstr($archivo, 'eliminado')) {
-					array_push($response, ['name' => $archivo]);
+					$parts = explode('.', $archivo);
+					$extension = array_pop($parts); // Get the last element as extension
+					$name = implode('.', $parts); // Join the remaining parts as name
+					
+					// $filePath = $repositoryPath . DIRECTORY_SEPARATOR . $archivo;
+					// $size = filesize($filePath); // Get file size in bytes
+					// $sizeTag = ($size > 1024 * 1024) ? 'MB' : 'KB'; // Check if size is greater than 1MB
+					// $sizeFormatted = ($sizeTag === 'MB') ? round($size / (1024 * 1024), 2) : round($size / 1024, 2); // Convert size to MB or KB
+
+					$filePath = $repositoryPath . DIRECTORY_SEPARATOR . $archivo;
+					$size = filesize($filePath); // Get file size in bytes
+					$sizeTag = 'KB'; // Default size tag
+
+					// Check if size is greater than 1GB
+					if ($size > 1024 * 1024 * 1024) {
+						$sizeFormatted = round($size / (1024 * 1024 * 1024), 2); // Convert size to GB
+						$sizeTag = 'GB';
+					} 
+					// Check if size is greater than 1MB
+					elseif ($size > 1024 * 1024) {
+						$sizeFormatted = round($size / (1024 * 1024), 2); // Convert size to MB
+						$sizeTag = 'MB';
+					} 
+					else {
+						$sizeFormatted = round($size / 1024, 2); // Convert size to KB
+					}
+
+					array_push($response, [
+							'original_name' => $archivo,
+							'name' => $name,
+							'extension' => $extension,
+							'size' => $sizeFormatted,
+							'size_tag' => $sizeTag
+						]
+					);
 				}
 
 			}

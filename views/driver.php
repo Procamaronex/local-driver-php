@@ -1,15 +1,48 @@
-<div id="app" style="z-index: -1!important;">
+<!-- <div class="container"> -->
+<div id="app" style="z-index: -1!important;" class="container">
     <div class="container text-center mb-5 mt-3">
-        <h1>DRIVER LOCAL <small class="small badge"><small class="badge badge-warning small"><?php echo($_ENV['version'] ?? 'v1.0.1'); ?></small></small></h1>
+        <h1 @click="visualizarQR('', 'INGREGAR AL REPOSITORIO')">DRIVER LOCAL <small class="small badge"><small class="badge badge-warning small"><?php echo($_ENV['version'] ?? 'v1.0.1'); ?> </small></small></h1>
     </div>
 
-    <div v-for="fichero in ficheros" style="z-index: -1!important;">
+    <!-- <div v-for="fichero in ficheros" style="z-index: -1!important;">
         <div class="text-center mb-2">
             <a class="badge badge-success" :href="armaRuta(fichero.name)" target="_blank"><h5>{{fichero.name}} <small>(descargar)</small> </h5></a>
 
             <span class="btn btn-danger" @click="eliminaFichero(fichero.name)">Eliminar</span>
         </div>
+    </div> -->
+    
+
+    <div class="row pt-5">
+        <div class="col-sm-12 col-lg-3" v-for="fichero in ficheros">
+            <div class="card-container">
+                <div class="card" style="width: 100% !important">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <h5>{{fichero.name}} </h5>
+                            <div :id="fichero.name"></div>
+                        </h5>
+                    </div>
+                    <span class="extension-text">{{fichero.extension}}</span>
+                    <div class="qr-image" :id="'qr-image-'+fichero.name" @click="visualizarQR(armaRuta(fichero.original_name))"></div>
+
+                    <ul class="list-group list-group-flush text-center">
+                        <li class="list-group-item pb-3">{{fichero.size}} {{fichero.size_tag}}</li>
+                        <div class="row p-2">
+                            <div class="col-6">
+                                <a class="btn btn-success btn-block" :href="armaRuta(fichero.original_name)" target="_blank">Descargar</a>
+                            </div>
+                            <div class="col-6">
+                                <button class="btn btn-danger btn-block" @click="eliminaFichero(fichero.original_name)">Eliminar</button>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
+        
+
 
     <div class="text-center" v-if="ficheros.length <= 0">
         <span class="mt-5 badge">
@@ -35,7 +68,7 @@
     tabindex="-1" 
     role="dialog" 
     aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog " role="document" style="color: black">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="color: black">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Cargar fichero <span v-if="file">[{{file.name}}]</span></h5> 
@@ -101,6 +134,7 @@
 
 
 </div>
+<!-- </div> -->
 
 
 <script>
@@ -123,6 +157,9 @@
                 axios.get('/?c=driver&a=ficheros')
                     .then((respuesta) => {
                         this.ficheros = respuesta.data;
+
+                        // Llamar a setTimeout() para ejecutar la función después de 2 segundos
+                        setTimeout(this.asignaQrBase, 1000);
                     });
             },
             armaRuta(fichero) {
@@ -274,6 +311,58 @@
                         icon: type,
                         title: message
                     });
+            },
+            visualizarQR (url, title = '') {
+                Swal.fire({
+                    title: "",
+                    text: "",
+                    html: '<div class="d-flex align-items-center justify-content-center" style="height: 100%;">'+
+                            '<div class="test-2 text-center"></div>'+
+                        '</div>',
+                    // icon: "success"
+                });
+
+                var qrcodex = new QRCode(document.getElementsByClassName("test-2")[0], {
+                    text: this.recoveryHostAndPort() + '/' + url,
+                    width: 110,
+                    height: 110
+                });
+            },
+            recoveryHostAndPort() {
+                // Obtener el host del servidor
+                var host = window.location.hostname;
+
+                // Obtener el puerto del servidor
+                var port = window.location.port;
+
+                // Armar la URL con el host y el puerto
+                var url = "http://" + host;
+                if (port) {
+                    url += ":" + port;
+                }
+
+                return url;
+            },
+
+            asignaQrBase() {
+
+                // Eliminar cualquier código QR existente
+                var qrContainers = document.querySelectorAll('[id^="qr-image-"]');
+                qrContainers.forEach(container => {
+                    container.innerHTML = ''; // Limpiar el contenido del contenedor
+                });
+
+                this.ficheros.forEach((fichero) => {
+
+                    var element = document.getElementById("qr-image-"+fichero.name);
+
+                    var qrCode = new QRCode(element, {
+                        text: this.recoveryHostAndPort(), // Usa el nombre del archivo como texto del código QR
+                        width: 25,
+                        height: 25
+                    });
+
+                });
             }
         },
     });
